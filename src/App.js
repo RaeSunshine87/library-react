@@ -10,15 +10,19 @@ function App() {
     <Router>
       <div className="App">
         <Nav />
+        {/*<Routes>
+        <Route path="/" exact component={Home} />
+        <Route path="/books" component={Books} />
+        </Routes>*/}  
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/books" element={<Books books={books} />} />
-          <Route path="/books/:id" element={<BookInfo books={books}
+          {/*<Route path="/books/:id" element={<BookInfo books={books}
           addToCart={addToCart} cart={cart} />} />
           <Route path="/cart" element={<Cart books={books} cart={cart}
-          changeQuantity={changeQuantity} />} />
-          <Footer />
-        </Routes>
+          changeQuantity={changeQuantity} />} /> */}  
+        </Routes>   
+        <Footer />
       </div>
     </Router>
   );
