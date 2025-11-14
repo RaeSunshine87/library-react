@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const Cart = ({ cart, changeQuantity }) => {
+const Cart = ({ cart, changeQuantity, cart }) => {
     const total = () => {
         let price = 0;
         cart.forEach((item) => {
-           price += (item.salePrice || item.originalPrice).toFixed(2);
+            price += +(
+                (item.salePrice || item.originalPrice) * item.quantity
+        ); 
         });
         return price;
     };
-  return (
+ return (
     <div id="books__body">
       <main id="books__main">
         <div className="books__container">
@@ -38,7 +40,7 @@ const Cart = ({ cart, changeQuantity }) => {
                           <span className="cart__book--price">
                             ${(book.salePrice || book.originalPrice).toFixed(2)}
                           </span>
-                          <button className="cart__book--remove">
+                          <button className="cart__book--remove" onClick={removeItem}>
                             Remove
                             </button>
                         </div>
@@ -62,15 +64,15 @@ const Cart = ({ cart, changeQuantity }) => {
             <div className="total">
               <div className="total__item total__sub-total">
                 <span>Subtotal</span>
-                <span>PRICE</span>
+                <span>${(total() * 0.9).toFixed(2)}</span>
               </div>
-              <div className="total__item total__sub-tax">
+              <div className="total__item total__tax">
                 <span>Tax</span>
-                <span>PRICE</span>
+                <span>${(total() * 0.1).toFixed(2)}</span>
               </div>
-              <div className="total__item total__sub-price">
+              <div className="total__item total__price">
                 <span>Total</span>
-                <span>${total()}</span>
+                <span>${(total().toFixed(2))}</span>
               </div>
               <button
                 className="btn btn__checkout no-cursor"
