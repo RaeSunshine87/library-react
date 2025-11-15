@@ -13,7 +13,7 @@ function App() {
   const [cart, setCart] = useState([]);
 
   function addToCart(book) {
-    setCart([...cart, { ...book, quantity: 1}]);
+    setCart([...cart, { ...book, quantity: 1 }]);
   }
 
   function changeQuantity(book, quantity) {
@@ -30,7 +30,15 @@ function App() {
   }
 
   function removeItem(item) {
-    console.log(removeCart)
+    setCart(cart.filter(book => book.id !== item.id))
+  }
+
+  function numberOfItems(item) {
+    let counter = 0;
+    cart.forEach(item => {
+      counter += item.quantity
+    })
+    return counter;
   }
 
   useEffect(() => {
@@ -40,7 +48,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Nav />
+        <Nav numberOfItems={numberOfItems()} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/books" element={<Books books={books} />} />
