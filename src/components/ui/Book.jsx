@@ -16,9 +16,13 @@ const Book = ({ book }) => {
     image.src = book.url;
     image.onload = () => {
        if (!cancelled) {
-        setImg(image);
+        setTimeout(() => {
+          setImg(image);
+       }, 300);
         }
     };
+
+  
 
     return () => {
       cancelled = true;
