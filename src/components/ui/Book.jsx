@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 import Price from "./Price";
@@ -7,20 +7,21 @@ import Price from "./Price";
 const Book = ({ book }) => {
   const [img, setImg] = useState();
 
-  const mountedRef = useRef(true);
-
   useEffect(() => {
+    let cancelled = false;
+
+    setImg(undefined);
+
     const image = new Image();
     image.src = book.url;
     image.onload = () => {
-      
-        if (mountedRef.current) {
+       if (!cancelled) {
         setImg(image);
         }
-      
     };
+
     return () => {
-      mountedRef.current = false;
+      cancelled = true;
     };
   }, [book.url]);
 
